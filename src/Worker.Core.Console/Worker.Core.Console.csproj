@@ -11,8 +11,4 @@
     <PackageReference Include="NRedisStack" Version="0.6.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\StackExchange.Redis\src\StackExchange.Redis\StackExchange.Redis.csproj" />
-  </ItemGroup>
-
 </Project>

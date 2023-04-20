@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker.Core.Api", "src\Work
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker.Core.Console", "src\Worker.Core.Console\Worker.Core.Console.csproj", "{DF711A77-D5CB-48F9-936B-CCDFA6A345C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StackExchange.Redis", "..\StackExchange.Redis\src\StackExchange.Redis\StackExchange.Redis.csproj", "{D0C4B6FA-1E6A-4D08-930E-7A3299057C18}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,10 +23,6 @@ Global
 		{DF711A77-D5CB-48F9-936B-CCDFA6A345C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF711A77-D5CB-48F9-936B-CCDFA6A345C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF711A77-D5CB-48F9-936B-CCDFA6A345C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0C4B6FA-1E6A-4D08-930E-7A3299057C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0C4B6FA-1E6A-4D08-930E-7A3299057C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0C4B6FA-1E6A-4D08-930E-7A3299057C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0C4B6FA-1E6A-4D08-930E-7A3299057C18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,7 +30,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E692D6DF-CCFE-4E56-8856-7BF2D28CF6C2} = {D78F6590-22F7-44BC-8DDF-4D6B8AF2665B}
 		{DF711A77-D5CB-48F9-936B-CCDFA6A345C1} = {D78F6590-22F7-44BC-8DDF-4D6B8AF2665B}
-		{D0C4B6FA-1E6A-4D08-930E-7A3299057C18} = {D78F6590-22F7-44BC-8DDF-4D6B8AF2665B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A48B056-FD89-43E6-AFD3-20AB121C1966}
