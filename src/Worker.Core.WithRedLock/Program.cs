@@ -1,5 +1,6 @@
 ﻿using RedLockNet.SERedis;
 using RedLockNet.SERedis.Configuration;
+using StackExchange.Redis;
 using System.Net;
 
 namespace Worker.Core.WithRedLock
@@ -8,33 +9,58 @@ namespace Worker.Core.WithRedLock
     {
         static void Main(string[] args)
         {
-            var redlockEndPoints = new List<RedLockEndPoint>
+            try
             {
-                new RedLockEndPoint
+                var key = $"lab:teste:redis:{Guid.NewGuid()}";
+
+                var configNew = new ConfigurationOptions
+                {
+                    EndPoints = 
+                    {
+                        new DnsEndPoint("localhost", 6378)
+                    },
+                    AsyncTimeout = 100,
+                    Password = "admin123",
+                    DefaultDatabase = 2,
+                    Ssl = false,
+                    AbortOnConnectFail = false,
+                    AllowAdmin = false
+                };
+
+                var configNew2 = new ConfigurationOptions
                 {
                     EndPoints =
                     {
                         new DnsEndPoint("localhost", 6376)
                     },
-                    ConnectionTimeout = 5000,
+                    AsyncTimeout = 100,
                     Password = "admin123",
-                    RedisDatabase = 2,
-                    
-                },
-                new RedLockEndPoint
-                {
-                    EndPoint = new DnsEndPoint("localhost", 6377),
-                    ConnectionTimeout = 5000,
-                    Password = "admin123",
-                    RedisDatabase = 2,
-                }
-            };
+                    DefaultDatabase = 2,
+                    Ssl = false,
+                    AbortOnConnectFail = false,
+                    AllowAdmin = false
+                };
 
-            using (var redlockFactory = RedLockFactory.Create(redlockEndPoints))
-            {
-                var ttl = TimeSpan.FromSeconds(400);
-                var redLock = redlockFactory.CreateLockAsync("lab:teste:redis", ttl).GetAwaiter().GetResult();
+                var existingConnectionMultiplexer1 = ConnectionMultiplexer.Connect(configNew);
+                var existingConnectionMultiplexer2 = ConnectionMultiplexer.Connect(configNew2);
+
+                var multiplexers = new List<RedLockMultiplexer>
+                {
+                    existingConnectionMultiplexer2,
+                    existingConnectionMultiplexer1
+                };
+
+                using (var redlockFactory = RedLockFactory.Create(multiplexers))
+                {
+                    var ttl = TimeSpan.FromSeconds(400);
+                    redlockFactory.CreateLockAsync(key, ttl).GetAwaiter().GetResult();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis.Extensions.System.Text.Json;
 
 namespace Worker.Core.Api
@@ -15,7 +16,7 @@ namespace Worker.Core.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddStackExchangeRedisExtensions<SystemTextJsonSerializer>(LoadRedisConfiguration.Get());
+            builder.Services.AddStackExchangeRedisExtensions<SystemTextJsonSerializer>(LoadRedisConfiguration.GetRedisConfigurations());
 
             var app = builder.Build();
 

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker.Core.Api", "src\Work
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker.Core.Console", "src\Worker.Core.Console\Worker.Core.Console.csproj", "{DF711A77-D5CB-48F9-936B-CCDFA6A345C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker.Core.WithRedLock", "src\Worker.Core.WithRedLock\Worker.Core.WithRedLock.csproj", "{F961FFBC-485C-42F6-A346-F368571BBC79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker.Core.WithRedLock", "src\Worker.Core.WithRedLock\Worker.Core.WithRedLock.csproj", "{F961FFBC-485C-42F6-A346-F368571BBC79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

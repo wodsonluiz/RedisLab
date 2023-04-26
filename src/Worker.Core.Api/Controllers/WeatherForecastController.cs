@@ -26,12 +26,13 @@ namespace Worker.Core.Api.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var guid = Guid.NewGuid().ToString();
-            var db = _clientFactory.GetRedisDatabase("First Instance");
-            var db2 = _clientFactory.GetRedisDatabase("Secndary Instance");
-            var db3 = _clientFactory.GetRedisDatabase("Third Instance");
-            db.SetAddAsync(guid, "bar").GetAwaiter().GetResult();
-            db2.SetAddAsync(guid, "bar").GetAwaiter().GetResult();
-            db3.SetAddAsync(guid, "bar").GetAwaiter().GetResult();
+
+            foreach (var client in _clientFactory.GetAllClients())
+            {
+                var db = client.GetDefaultDatabase();
+
+                db.SetAddAsync(guid, "wod").GetAwaiter().GetResult();
+            }
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
