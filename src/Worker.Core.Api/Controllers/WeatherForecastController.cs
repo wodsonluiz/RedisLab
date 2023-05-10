@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using StackExchange.Redis.Extensions.Core.Abstractions;
+using Redis.EasyConnectMultiServers.Abstractions;
 
 namespace Worker.Core.Api.Controllers
 {
@@ -7,7 +7,7 @@ namespace Worker.Core.Api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly IRedisClientFactory _clientFactory;
+        private readonly IRedisProviderMultiServers _redisProviderMultiServers;
 
         private static readonly string[] Summaries = new[]
         {
@@ -16,10 +16,10 @@ namespace Worker.Core.Api.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRedisClientFactory clientFactory)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRedisProviderMultiServers redisProviderMultiServers)
         {
             _logger = logger;
-            _clientFactory = clientFactory;
+            _redisProviderMultiServers = redisProviderMultiServers;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -27,12 +27,10 @@ namespace Worker.Core.Api.Controllers
         {
             var guid = Guid.NewGuid().ToString();
 
-            foreach (var client in _clientFactory.GetAllClients())
-            {
-                var db = client.GetDefaultDatabase();
+            _redisProviderMultiServers.AddMultiAsync(guid, "wod 6");
 
-                db.SetAddAsync(guid, "wod").GetAwaiter().GetResult();
-            }
+            var result = _redisProviderMultiServers.GetMultiAsync<string>(guid.ToString()).GetAwaiter().GetResult();
+
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

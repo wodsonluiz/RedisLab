@@ -10,7 +10,7 @@ namespace Worker.Core.Api
             yield return new RedisConfiguration
             {
                 AbortOnConnectFail = true,
-                Hosts = new[] { new RedisHost { Host = "localhost", Port = 6376 } },
+                Hosts = new[] { new RedisHost { Host = "localhost", Port = 6377 } },
                 AllowAdmin = false,
                 Password = "admin123",
                 SyncTimeout = 5000,
